@@ -50,6 +50,7 @@ public class ReizigerDAOPsql implements ReizigerDAO{
         pst.setInt(1, id);
         ResultSet resultSet = pst.executeQuery();
         return null;
+
     }
 
     @Override
