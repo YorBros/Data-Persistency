@@ -1,5 +1,7 @@
 package nl.hu.dp;
 
+import nl.hu.dp.Domain.Adres;
+import nl.hu.dp.Domain.AdresDOAPsql;
 import nl.hu.dp.Domain.Reiziger;
 import nl.hu.dp.Domain.ReizigerDAOPsql;
 
@@ -12,9 +14,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         ReizigerDAOPsql rdao = new ReizigerDAOPsql(getConnection());
-        testReizigerDAO(rdao);
-//        Reiziger reiziger = new Reiziger(6, "J", "", "Jordy", Date.valueOf("1999-09-09"));
-//        System.out.println(rdao.findByGbdatum("2002-12-03"));
+        AdresDOAPsql adao = new AdresDOAPsql(getConnection());
+        System.out.println(adao.findByReiziger(rdao.findById(2)));
+        System.out.println(rdao.findById(2));
+//        Adres adres = new Adres(6, "1234AB", "1", "Straat", "Stad", 6);
+//        adao.save(adres);
+
         closeConnection();
     }
 

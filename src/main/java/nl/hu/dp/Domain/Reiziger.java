@@ -8,6 +8,7 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private Date geboortedatum;
+    private Adres adres;
 
     public Reiziger(int reiziger_id, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum) {
         this.reiziger_id = reiziger_id;
@@ -59,11 +60,12 @@ public class Reiziger {
 
     @Override
     public String toString() {
-        return String.format("#%s: %s. %s %s (%s)",
+        return String.format("#%s: %s. %s %s (%s) %s",
                 reiziger_id,
                 voorletters,
                 tussenvoegsel,
                 achternaam,
-                geboortedatum);
+                geboortedatum,
+                adres != null ? adres.toString() : "Geen adres bekend");
     }
 }
