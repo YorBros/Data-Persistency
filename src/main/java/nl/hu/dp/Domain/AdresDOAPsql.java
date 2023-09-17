@@ -1,6 +1,8 @@
 package nl.hu.dp.Domain;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdresDOAPsql implements AdresDAO{
     private Connection connection = null;
@@ -74,6 +76,29 @@ public class AdresDOAPsql implements AdresDAO{
                         resultSet.getInt("reiziger_id")
                 );
             } return null;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<Adres> findAll() {
+        try {
+            List <Adres> adressen = new ArrayList<>();
+            String q = "SELECT * FROM adres";
+            PreparedStatement pst = connection.prepareStatement(q);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                adressen.add(new Adres(
+                        resultSet.getInt("adres_id"),
+                        resultSet.getString("postcode"),
+                        resultSet.getString("huisnummer"),
+                        resultSet.getString("straat"),
+                        resultSet.getString("woonplaats"),
+                        resultSet.getInt("reiziger_id")
+                ));
+            } return adressen;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;

@@ -15,11 +15,21 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         ReizigerDAOPsql rdao = new ReizigerDAOPsql(getConnection());
         AdresDOAPsql adao = new AdresDOAPsql(getConnection());
-        System.out.println(adao.findByReiziger(rdao.findById(2)));
-        System.out.println(rdao.findById(2));
+//        System.out.println(adao.findByReiziger(rdao.findById(2)));
+//        System.out.println(rdao.findById(2));
 //        Adres adres = new Adres(6, "1234AB", "1", "Straat", "Stad", 6);
 //        adao.save(adres);
 
+        List<Adres> adressen = adao.findAll();
+        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
+        for (Adres a : adressen) {
+            System.out.println(a);
+        }
+        List<Reiziger> reizigers = rdao.findAll();
+        System.out.println("[Test] ReizigerDAO.findAll() geeft de volgende reizigers:");
+        for (Reiziger r : reizigers) {
+            System.out.println(r);
+        }
         closeConnection();
     }
 
