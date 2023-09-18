@@ -21,7 +21,9 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             pst.setString(3, reiziger.getTussenvoegsel());
             pst.setString(4, reiziger.getAchternaam());
             pst.setDate(5, reiziger.getGeboortedatum());
-            return pst.execute();
+            pst.execute();
+            pst.close();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -38,7 +40,9 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             pst.setString(3, reiziger.getAchternaam());
             pst.setDate(4, reiziger.getGeboortedatum());
             pst.setInt(5, reiziger.getReiziger_id());
-            return pst.execute();
+            pst.execute();
+            pst.close();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -51,7 +55,9 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             String q = "DELETE FROM reiziger WHERE reiziger_id = ?";
             PreparedStatement pst = connection.prepareStatement(q);
             pst.setInt(1, reiziger.getReiziger_id());
-            return pst.execute();
+            pst.execute();
+            pst.close();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -65,15 +71,18 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             PreparedStatement pst = connection.prepareStatement(q);
             pst.setInt(1, id);
             ResultSet resultSet = pst.executeQuery();
-            if (resultSet.next()){
-                return new Reiziger(
+            Reiziger temp = null;
+            if (resultSet.next()) {
+                temp = new Reiziger(
                         resultSet.getInt("reiziger_id"),
                         resultSet.getString("voorletters"),
                         resultSet.getString("tussenvoegsel"),
                         resultSet.getString("achternaam"),
                         resultSet.getDate("geboortedatum"));
             }
-            return null;
+            pst.close();
+            resultSet.close();
+            return temp;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
@@ -97,6 +106,8 @@ public class ReizigerDAOPsql implements ReizigerDAO{
                         resultSet.getString("achternaam"),
                         resultSet.getDate("geboortedatum")));
             }
+            pst.close();
+            resultSet.close();
             return reizigers;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -119,6 +130,8 @@ public class ReizigerDAOPsql implements ReizigerDAO{
                         resultSet.getString("achternaam"),
                         resultSet.getDate("geboortedatum")));
             }
+            pst.close();
+            resultSet.close();
             return reizigers;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

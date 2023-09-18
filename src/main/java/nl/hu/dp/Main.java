@@ -20,16 +20,17 @@ public class Main {
 //        Adres adres = new Adres(6, "1234AB", "1", "Straat", "Stad", 6);
 //        adao.save(adres);
 
-        List<Adres> adressen = adao.findAll();
-        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
-        for (Adres a : adressen) {
-            System.out.println(a);
-        }
-        List<Reiziger> reizigers = rdao.findAll();
-        System.out.println("[Test] ReizigerDAO.findAll() geeft de volgende reizigers:");
-        for (Reiziger r : reizigers) {
-            System.out.println(r);
-        }
+//        List<Adres> adressen = adao.findAll();
+//        System.out.println("[Test] AdresDAO.findAll() geeft de volgende adressen:");
+//        for (Adres a : adressen) {
+//            System.out.println(a);
+//        }
+//        List<Reiziger> reizigers = rdao.findAll();
+//        System.out.println("[Test] ReizigerDAO.findAll() geeft de volgende reizigers:");
+//        for (Reiziger r : reizigers) {
+//            System.out.println(r);
+//        }
+        testReizigerDAO(rdao);
         closeConnection();
     }
 
